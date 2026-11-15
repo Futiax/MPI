@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPI Camille Guérin</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>MPI Camille Guérin</h1>
+  <p>Cours et fiches de révision</p>
+  <input id="filtre" type="search" placeholder="Rechercher un cours, une fiche…" aria-label="Rechercher">
+</header>
+<main>
+<!-- CATEGORIES -->
+</main>
+<script>
+const filtre = document.getElementById("filtre");
+filtre.addEventListener("input", () => {
+  const q = filtre.value.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+  document.querySelectorAll(".carte").forEach(c => {
+    let n = 0;
+    c.querySelectorAll("li").forEach(li => {
+      const ok = li.textContent.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").includes(q);
+      li.hidden = !ok; n += ok;
+    });
+    c.hidden = n === 0;
+  });
+});
+</script>
+</body>
+</html>
